@@ -2,6 +2,7 @@ package com.tutorial.recyclerviewplayground;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 /**
@@ -10,7 +11,7 @@ import android.widget.TextView;
 
 public class ItemVH extends RecyclerView.ViewHolder {
 
-    protected TextView name;
+    protected EditText name;
 
     public ItemVH(View itemView) {
         super(itemView);

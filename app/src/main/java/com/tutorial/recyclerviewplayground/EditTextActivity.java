@@ -1,6 +1,5 @@
 package com.tutorial.recyclerviewplayground;
 
-import android.inputmethodservice.KeyboardView;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -31,7 +30,6 @@ public class EditTextActivity extends AppCompatActivity implements OnLastItemVis
 
     private AutoCompleteTextView autoCompleteTextView;
 
-
     private void setupRecyclerView() {
         pagingLayoutManager = new PagingLayoutManager(this);
 
@@ -41,11 +39,38 @@ public class EditTextActivity extends AppCompatActivity implements OnLastItemVis
     }
 
 
-    private void setupEditText(){
+    private void setupEditText() {
+
+//        autoCompleteTextView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View v, boolean hasFocus) {
+//                Log.d("Jjjj", "Has focus" + hasFocus);
+//                if (!hasFocus)
+//                    autoCompleteTextView.setText(autoCompleteTextView.getText().toString() + "s");
+//            }
+//        });
+
+//        autoCompleteTextView.setFilters(new InputFilter[]{
+//                new InputFilter() {
+//                    @Override
+//                    public CharSequence filter(CharSequence source, int start, int end,
+//                                               Spanned dest, int dstart, int dend) {
+//
+//                        Log.d("InputFilter", source.toString()+"--"+dest);
+//                        if (autoCompleteTextView.getText().toString().contains("s")) {
+//                            autoCompleteTextView.setText(autoCompleteTextView.getText().toString().replace("s", ""));
+//                        }
+//                        return source.toString() + "s";
+//                    }
+//                }
+//        });
+
+
         autoCompleteTextView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 Log.d("Jjj", v.getText().toString());
+                itemAdapter.updateStakes(Integer.parseInt(v.getText().toString()));
                 return true;
             }
         });
@@ -72,13 +97,22 @@ public class EditTextActivity extends AppCompatActivity implements OnLastItemVis
         itemAdapter = new ItemAdapter();
         itemAdapter.setItems(getItems());
         recyclerView.setAdapter(itemAdapter);
+        itemAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onChanged() {
+                Log.d("Jjjj","Onchanged");
+                if(itemAdapter.isMixed()){
+                    autoCompleteTextView.setText("Mixed");
+                }
+            }
+        });
 
     }
 
     private List<Item> getItems() {
         List<Item> items = new ArrayList<>(30);
         for (int i = 0; i < 5; i++) {
-            items.add(new Item(  i+"s"));
+            items.add(new Item( "5s"));
         }
         return items;
     }
@@ -108,4 +142,12 @@ public class EditTextActivity extends AppCompatActivity implements OnLastItemVis
             }
         }, 1000);
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d("Jjjj","onDestroy");
+    }
+
+
 }

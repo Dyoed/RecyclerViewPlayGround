@@ -31,10 +31,22 @@
     <AutoCompleteTextView
         android:paddingTop="12dp"
         android:id="@+id/autoComplete"
+        android:maxLength="5"
         android:inputType="number"
-        android:maxLength="3"
+        android:text="ss"
         android:imeOptions="actionGo"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize" />
+
+    <LinearLayout
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:text="test"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
 </FrameLayout>

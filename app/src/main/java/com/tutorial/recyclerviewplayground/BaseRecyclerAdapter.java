@@ -12,6 +12,10 @@ public abstract class BaseRecyclerAdapter<E, VH extends RecyclerView.ViewHolder>
 
     private List<E> items;
 
+    protected List<E> getItems(){
+        return items;
+    }
+
     public void setItems(List<E> items) {
         this.items = items;
         notifyDataSetChanged();

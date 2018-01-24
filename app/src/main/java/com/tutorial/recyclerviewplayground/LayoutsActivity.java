@@ -18,14 +18,9 @@ public class LayoutsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_layout);
 
-
-        BuildConfig.VERSION_CODE
-        BuildConfig.VERSION_NAME
-
         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
             @Override
             public void run() {
-                android.R.anim.fade_in
                 Toast.makeText(LayoutsActivity.this, "Tiiiiiiiiiji", Toast.LENGTH_SHORT).show();
             }
         }, 800);
